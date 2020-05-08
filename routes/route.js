@@ -30,7 +30,7 @@ router.post('/contact',(req, res, next)=>{
 })
 
 //deleting contacts
-router.delete('/contact/:id',(req, res, next)=>{
+router.delete('/contact/',(req, res, next)=>{
     var _id = req.params.id;
     console.log(_id);
     Contact.remove({_id : _id}, (err, result)=>{
