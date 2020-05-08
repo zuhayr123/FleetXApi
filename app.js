@@ -5,8 +5,8 @@ var cors = require('cors');
 var bodyparser = require('body-parser');
 var path = require('path');
 
-//routing file
-const route = require('./routes/route.js');
+//routing files
+const route_driver = require('./routes/route_driver.js');
 
 //test for trial
 
@@ -20,22 +20,10 @@ app.use(bodyparser.json());
 app.use(express.urlencoded());
 
 //routes
-app.use('/api', route);
-
-
+app.use('/api/driver', route_driver);
 
 const uri = "mongodb+srv://abou_987:mypassword@123@cluster0-5j8e4.mongodb.net/test?retryWrites=true&w=majority";
 mongoose.connect(uri, { useNewUrlParser: true });
-
-//mongodb for internet usage
-
-// const MongoClient = require('mongodb').MongoClient;
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
 
 //on connection
 mongoose.connection.on('connected', () => {
