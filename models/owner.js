@@ -39,4 +39,4 @@ const OwnerSchema = mongoose.Schema({
     }
 });
 
-const Owner = module.exports = mongoose.model('Owner', TruckSchema);
+const Owner = module.exports = mongoose.model('Owner', OwnerSchema);

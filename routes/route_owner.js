@@ -2,34 +2,34 @@ const express = require('express');
 const extend = require('extend');
 const router = express.Router();
 
-const Driver = require('../models/driver');
+const Owner = require('../models/owner');
 
-// getting drivers
+// getting owners
 router.get('/', (req, res, next)=>{
-    Driver.find((err, drivers)=>{
-        res.json(drivers);
+    Owner.find((err, owners)=>{
+        res.json(owners);
     })
 });
 
-//adding drivers
+//adding owners
 router.post('/',(req, res, next)=>{
-    let newDriver = new Driver(req.body);
-    newDriver.save((err, driver)=>{
+    let newOwner = new Owner(req.body);
+    newOwner.save((err, owner)=>{
         if(err){
             //console.log(err);
             res.json("Error occured in saving : " + err);
         }
         else{
-            res.json(driver);
+            res.json(owner);
         }
     })
 })
 
-//deleting drivers
+//deleting owners
 router.delete('/',(req, res, next)=>{
     var _id = req.param("id");
     //console.log(_id);
-    Driver.remove({_id : _id}, (err, result)=>{
+    Owner.remove({_id : _id}, (err, result)=>{
         if(err){
             res.json("Error : " + err);
         }
@@ -42,14 +42,14 @@ router.delete('/',(req, res, next)=>{
 //Fetch all entries by regex 
 router.get('/getall', (req, res, next)=>{
     var name = req.body.name;
-    Driver.find({
+    Owner.find({
         first_name : {$regex: "^" + name, $options:"i"}
-    }, (err, drivers) =>{
+    }, (err, owners) =>{
         if(err){
             res.json("Error")
         }
         else{
-            res.json(drivers);
+            res.json(owners);
         }
     })
 

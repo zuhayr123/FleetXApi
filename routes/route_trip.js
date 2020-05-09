@@ -2,34 +2,34 @@ const express = require('express');
 const extend = require('extend');
 const router = express.Router();
 
-const Driver = require('../models/driver');
+const Trip = require('../models/trip');
 
-// getting drivers
+// getting trips
 router.get('/', (req, res, next)=>{
-    Driver.find((err, drivers)=>{
-        res.json(drivers);
+    Trip.find((err, trips)=>{
+        res.json(trips);
     })
 });
 
-//adding drivers
+//adding trips
 router.post('/',(req, res, next)=>{
-    let newDriver = new Driver(req.body);
-    newDriver.save((err, driver)=>{
+    let newTrip = new Trip(req.body);
+    newTrip.save((err, trip)=>{
         if(err){
             //console.log(err);
             res.json("Error occured in saving : " + err);
         }
         else{
-            res.json(driver);
+            res.json(trip);
         }
     })
 })
 
-//deleting drivers
+//deleting trips
 router.delete('/',(req, res, next)=>{
     var _id = req.param("id");
     //console.log(_id);
-    Driver.remove({_id : _id}, (err, result)=>{
+    Trip.remove({_id : _id}, (err, result)=>{
         if(err){
             res.json("Error : " + err);
         }
@@ -42,14 +42,14 @@ router.delete('/',(req, res, next)=>{
 //Fetch all entries by regex 
 router.get('/getall', (req, res, next)=>{
     var name = req.body.name;
-    Driver.find({
+    Trip.find({
         first_name : {$regex: "^" + name, $options:"i"}
-    }, (err, drivers) =>{
+    }, (err, trips) =>{
         if(err){
             res.json("Error")
         }
         else{
-            res.json(drivers);
+            res.json(trips);
         }
     })
 
