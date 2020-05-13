@@ -22,6 +22,7 @@ router.get('/', (req,  res , next) =>{
             })
         }
         else{
+            users.password = "-1";
             res.json({msg: 'Successfully logged in',users, status : 'success'});
         }
     })
